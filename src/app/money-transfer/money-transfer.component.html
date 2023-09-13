@@ -1,0 +1,110 @@
+<h1>Money Transfer</h1>
+<hr>
+<form [formGroup]="moneyForm">
+    <div class="flex gap-8">
+      Card No
+        <div class="mb-4">
+            <div class="flex flex-col">
+                <input class type="text" formControlName="cardNo" (input)="onInput($event)">
+                <p>{{ output }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex gap-8">
+      Email
+        <div class="mb-4">
+          <div class="flex flex-col">
+            <input class type="text" formControlName="email">
+            <span *ngIf="emailErrors?.['email']" class="pt-2 text-sm text-red-400">
+              Please enter a valid email.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        Pay Method
+      </div>
+      <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
+        <input
+          class="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+          type="radio"
+          [value]="'Instant'"
+          formControlName="payMethod"
+          id="radioDefault01" />
+        <label
+          class="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+          for="radioDefault01">
+          Instant
+        </label>
+      </div>
+      <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
+        <input
+          class="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+          type="radio"
+          [value]="'Regular'"
+          formControlName="payMethod"
+          id="radioDefault02"
+          checked />
+        <label
+          class="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+          for="radioDefault02">
+          Regular
+        </label>
+      </div>
+
+      <div class="flex gap-8">
+        Amount
+        <div class="mb-4">
+          <div class="flex flex-col">
+            <input class type="number" formControlName="amount" (input)="onAmountInput($event)">
+            <span *ngIf="moneyForm.get('amount')?.errors" class="pt-2 text-sm text-red-400">
+              the amount should be between 10 - 20000.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-8">
+        Currency
+        <div class="mb-4">
+          <div class="flex flex-col">
+            <select  formControlName="currency" (input)="onSelect($event)">
+              <option value="">None</option>
+              <option value="usd">USD</option>
+              <option value="eur">EUR</option>
+              <option value="cad">CAD</option>
+            </select>
+            <span *ngIf="moneyForm.get('currency')?.errors" class="pt-2 text-sm text-red-400">
+              Currency is required.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-8">
+        Converted Amount
+        <div class="mb-4">
+          <div class="flex flex-col">
+            <output class type="number" formControlName="convertedAmount"> = {{ currencyOutput }}</output>
+            <span *ngIf="moneyForm.get('convertedAmount')?.errors" class="pt-2 text-sm text-red-400">
+              the converted cmount should be max 2500000.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class>
+        <button
+          (click)="showScore()"
+          class="py-3 px-8 rounded-sm bg-blue-700 text-white hover:bg-blue-600">Send</button>
+      </div>
+</form>
+
+
+<section *ngIf="isScoreDisplayed" class="mt-12">
+  <p>You send = {{ currencyOutput }} BDT</p>
+  <p>Our fees = {{ getFees() }} {{ currencyName }} ( {{ feesBDT }} BDT )</p>
+  <p>Receiver gets = {{ receiverGets }} BDT</p>
+</section>
