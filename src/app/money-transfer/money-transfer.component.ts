@@ -26,7 +26,7 @@ export class MoneyTransferComponent {
     payMethod: new FormControl<string>('', [Validators.required]),
     amount: new FormControl<number>(1, [Validators.required, Validators.max(20000), Validators.min(10)]),
     currency: new FormControl<string>('',[Validators.required]),
-    convertedAmount: new FormControl<number>(1, [Validators.required, Validators.max(2500000)])
+    convertedAmount: new FormControl<number>(0, [Validators.required, Validators.max(2500000)])
   })
 
   get emailErrors(): ValidationErrors | null | undefined {
@@ -116,7 +116,7 @@ export class MoneyTransferComponent {
 
   
 
-  showScore(): void{
+  send(): void{
     this.currencyName =  this.selectedCurrencyName(this.currencyInput);
     this.feesBDT = this.getFees() * this.getCurrencyValue;
     this.receiverGets = (this.currencyOutput - this.feesBDT);
