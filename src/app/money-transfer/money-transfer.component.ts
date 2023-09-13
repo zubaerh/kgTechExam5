@@ -24,7 +24,7 @@ export class MoneyTransferComponent {
     cardNo: new FormControl<string>('', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
     payMethod: new FormControl<string>('', [Validators.required]),
-    amount: new FormControl<number>(1, [Validators.required, Validators.max(20000), Validators.min(10)]),
+    amount: new FormControl<number>(0, [Validators.required, Validators.max(20000), Validators.min(10)]),
     currency: new FormControl<string>('',[Validators.required]),
     convertedAmount: new FormControl<number>(0, [Validators.required, Validators.max(2500000)])
   })
